@@ -11,7 +11,7 @@ foreach ($data as $d1) {
 
 require 'src/Text/Text.php';
 
-$result =  \Previewtechs\Phpie\Text\Text::plural('programmer');
+$result =  \Previewtechs\Phpie\Text\Text::snake('TestCamel');
 
 
 var_dump($result);
