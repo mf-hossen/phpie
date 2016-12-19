@@ -159,7 +159,8 @@ class Text
      * @param $value
      * @return  return  camelcase to snack.
      */
-    public static function snake($value, $delimiter = '.'){
+    public static function snake($value, $delimiter = '.')
+    {
         preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $value, $matches);
         $ret = $matches[0];
         foreach ($ret as &$match) {
@@ -170,11 +171,11 @@ class Text
 
     /**
      * @param $value
-     * @return mixed
+     * @return  return humanize string...
      */
     public static function humanize($value)
     {
-        return $manipulateStr = str_replace(['-', '_', '.'], ' ', $value);
+        return $manipulateStr = str_replace(['-', '_', '.', '/'], ' ', $value);
     }
 
 
@@ -221,6 +222,24 @@ class Text
                 return preg_replace($pattern, $result, $string);
         }
         return $string;
+    }
+
+    /**
+     * @param $value
+     * @return return UUID
+     */
+    public static function uuid($value)
+    {
+        return bin2hex(convert_uuencode($value));
+    }
+
+    /**
+     * @param $value
+     * @return  return decode value of UUID
+     */
+    public static function uuid_decode($value)
+    {
+        return convert_uudecode(hex2bin($value));
     }
 
 }
