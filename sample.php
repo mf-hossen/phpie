@@ -11,7 +11,7 @@ foreach ($data as $d1) {
 
 require 'src/Text/Text.php';
 
-$result =  \Previewtechs\Phpie\Text\Text::humanize('hello.world');
+$result =  \Previewtechs\Phpie\Text\Text::plural('programmer');
 
 
 var_dump($result);
