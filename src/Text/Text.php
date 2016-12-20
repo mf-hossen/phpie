@@ -84,17 +84,17 @@ class Text
 
 
     /**
-     * @param $value
+     * @param $string
      * @param $limit
      * @param string $end
      * @return string
      */
-    public static function excerpt($value, $limit, $end = '...')
+    public static function excerpt($string, $limit, $end = '...')
     {
-        if (mb_strwidth($value, 'UTF-8') <= $limit) {
-            return $value;
+        if (mb_strwidth($string, 'UTF-8') <= $limit) {
+            return $string;
         }
-        return rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')) . $end;
+        return rtrim(mb_strimwidth($string, 0, $limit, '', 'UTF-8')) . $end;
     }
 
     /**
@@ -102,10 +102,10 @@ class Text
      * @param $needles
      * @return bool
      */
-    public static function contains($value, $needles)
+    public static function contains($string, $needles)
     {
         foreach ((array)$needles as $needle) {
-            if ($needle != '' && mb_strpos($value, $needle) !== false) {
+            if ($needle != '' && mb_strpos($string, $needle) !== false) {
                 return true;
             }
         }
@@ -117,9 +117,9 @@ class Text
      * @param string $delimiter
      * @return string
      */
-    public static function slug($value, $delimiter = '_')
+    public static function slug($string, $delimiter = '_')
     {
-        $explodeValue = explode(' ', $value);
+        $explodeValue = explode(' ', $string);
         return join($delimiter, $explodeValue);
     }
 
@@ -225,21 +225,52 @@ class Text
     }
 
     /**
-     * @param $value
-     * @return return UUID
+     * @return string
      */
-    public static function uuid($value)
+    public static function uuid()
     {
-        return bin2hex(convert_uuencode($value));
+        return sprintf(
+            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            // 32 bits for "time_low"
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            // 16 bits for "time_mid"
+            mt_rand(0, 0xffff),
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 4
+            mt_rand(0, 0x0fff) | 0x4000,
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+            mt_rand(0, 0x3fff) | 0x8000,
+            // 48 bits for "node"
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff)
+        );
     }
 
-    /**
-     * @param $value
-     * @return  return decode value of UUID
-     */
-    public static function uuid_decode($value)
+    public static function uuid8()
     {
-        return convert_uudecode(hex2bin($value));
+        return sprintf(
+            '%04x%04x',
+            // 32 bits for "time_low"
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            // 16 bits for "time_mid"
+            mt_rand(0, 0xffff),
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 4
+            mt_rand(0, 0x0fff) | 0x4000,
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+            mt_rand(0, 0x3fff) | 0x8000,
+            // 48 bits for "node"
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff)
+        );
     }
 
 }
