@@ -1,4 +1,4 @@
 .git/*
 .idea/*
-sample.php/*
 vendor/*
+/sample.php
