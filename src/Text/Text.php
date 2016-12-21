@@ -4,7 +4,7 @@ namespace Previewtechs\Phpie\Text;
 
 use Cake\Utility\Inflector;
 
-class Text extends Inflector
+class Text
 {
 
     /**
@@ -52,7 +52,7 @@ class Text extends Inflector
      */
     public static function random($length)
     {
-        return random_bytes($length);
+        return bin2hex(random_bytes($length));
     }
 
     /**
@@ -69,6 +69,17 @@ class Text extends Inflector
     }
 
     /**
+     * return camelize  form cake php inflector.
+     * @param $string
+     * @param string $delimiter
+     * @return string
+     */
+    public static function camel($string, $delimiter = '_')
+    {
+        return Inflector::camelize($string, $delimiter);
+    }
+
+    /**
      * @param $value
      * @return  return  camelcase to snack.
      */
@@ -80,6 +91,61 @@ class Text extends Inflector
             $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
         }
         return implode('_', $ret);
+    }
+
+
+    /**
+     * return pluralize word from cake php inflector.
+     * @param $word
+     * @return string
+     */
+    public static function plural($word)
+    {
+        return Inflector::pluralize($word);
+    }
+
+
+    /**
+     * return singularize  word from cake php inflector.
+     * @param $word
+     * @return string
+     */
+    public static function singular($word)
+    {
+        return Inflector::singularize($word);
+    }
+
+
+    /**
+     * return humanize string from cake php inflector.
+     * @param $string
+     * @param string $delimiter
+     * @return string
+     */
+    public static function humanize($string, $delimiter = '_')
+    {
+        return Inflector::humanize($string, $delimiter);
+    }
+
+
+    /**
+     * return classified string form cake php inflector.
+     * @param $tableNAme
+     * @return string
+     */
+    public static function classify($tableNAme)
+    {
+        return Inflector::classify($tableNAme);
+    }
+
+    /**
+     * return tableize  form cake php inflector
+     * @param $className
+     * @return string
+     */
+    public static function tableize($className)
+    {
+        return Inflector::tableize($className);
     }
 
     /**
@@ -107,6 +173,7 @@ class Text extends Inflector
             mt_rand(0, 0xffff)
         );
     }
+
 
     /**
      * @return string
