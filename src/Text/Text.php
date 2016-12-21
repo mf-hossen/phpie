@@ -22,21 +22,6 @@ class Text
     }
 
     /**
-     * @param $value
-     * @param $needles
-     * @return bool
-     */
-    public static function contains($string, $needles)
-    {
-        foreach ((array)$needles as $needle) {
-            if ($needle != '' && mb_strpos($string, $needle) !== false) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * return from cake php Text Utility
      * @param string $string
      * @param string $delimiter
@@ -45,15 +30,6 @@ class Text
     public static function slug($string, $delimiter = '-')
     {
         return \Cake\Utility\Text::slug($string, $delimiter);
-    }
-
-    /**
-     * @param $length
-     * @return string
-     */
-    public static function random($length)
-    {
-        return bin2hex(random_bytes($length));
     }
 
     /**
@@ -134,9 +110,9 @@ class Text
      * @param $tableNAme
      * @return string
      */
-    public static function classify($tableNAme)
+    public static function classify($string)
     {
-        return Inflector::classify($tableNAme);
+        return Inflector::classify($string);
     }
 
     /**

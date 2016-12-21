@@ -80,4 +80,5 @@ class TextTests extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue(is_string(Text::wrap('I am a programmer', 9)));
     }
+
 }
