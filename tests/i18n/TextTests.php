@@ -10,19 +10,9 @@ class TextTests extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_string($result));
     }
 
-    public function testContains()
-    {
-        $this->assertTrue(is_bool(Text::contains('hello world', 'w')));
-    }
-
     public function testSlug()
     {
         $this->assertTrue(is_string(Text::slug('I am a programmer')));
-    }
-
-    public function testRandom()
-    {
-        $this->assertNotNull(Text::random('5'));
     }
 
     public function testRemoveWord()
