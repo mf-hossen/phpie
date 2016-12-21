@@ -158,4 +158,27 @@ class Text
     {
         return \Cake\Utility\Text::uuid();
     }
+
+    /**
+     * insert data into a string
+     * @param $string
+     * @param $data
+     * @param array $options
+     * @return string
+     */
+    public static function insert($string, $data, array $options = [])
+    {
+        return \Cake\Utility\Text::insert($string, $data, $options);
+    }
+
+    /**
+     * return wrapper sstring from cake php  Text class
+     * @param $string
+     * @param array $options
+     * @return string
+     */
+    public static function wrap($string, $options = [])
+    {
+        return \Cake\Utility\Text::wrap($string, $options);
+    }
 }

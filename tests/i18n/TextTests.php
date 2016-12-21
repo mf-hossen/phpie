@@ -69,4 +69,15 @@ class TextTests extends PHPUnit_Framework_TestCase
     {
         $this->assertNotNull(Text::uuid());
     }
+
+    public function testInsert()
+    {
+        $this->assertTrue(is_string(Text::insert('My name is :name and I am :age years old',
+            ['name' => 'Farhad', 'age' => '65'])));
+    }
+
+    public function testWrap()
+    {
+        $this->assertTrue(is_string(Text::wrap('I am a programmer', 9)));
+    }
 }
