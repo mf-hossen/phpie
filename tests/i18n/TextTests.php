@@ -3,72 +3,81 @@ use Previewtechs\Phpie\Text\Text;
 
 class TextTests extends PHPUnit_Framework_TestCase
 {
-    public function testExcerpt()
+    public function testExcerptStringReturnALimitCharacterWithGivenEllipsis()
     {
-        $result = Text::excerpt('hello world', 5);
-        $this->assertEquals(mb_strlen($result), 8);
-        $this->assertTrue(is_string($result));
+        $result = Text::excerpt('hello world', 0, 4, '---');
+        $this->assertEquals('hello---', $result);
+
     }
 
-    public function testSlug()
+    public function testSlugStringIfFoundSpaceConvertWithGivenDelimiterOrNot()
     {
-        $this->assertTrue(is_string(Text::slug('I am a programmer')));
+        $result = Text::slug('I am a programmer', '-');
+        $this->assertEquals('I-am-a-programmer', $result);
     }
 
-    public function testRemoveWord()
+    public function testStringAfterRemovedGivenWordExitsOrNot()
     {
-        $this->assertTrue(is_string(Text::removeWord('PHP is a programming language and i love php ', 'php')));
+        $result = Text::removeWord('PHP is a programming language and I love php ', 'php');
+        $this->assertEquals('is a programming language and i love', $result);
     }
 
-    public function testCamel()
+    public function testReturnStringCamelCaseOrNot()
     {
-        $this->assertTrue(is_string(Text::camel('hello-world', '-')));
+        $result = Text::camel('hello-world', '-');
+        $this->assertEquals("HelloWorld", $result);
+        $this->assertNotEquals('helloworld', $result);
     }
 
-    public function testSnake()
+    public function testSnakeReturnStringCamelToReverseWithGivenDelimiter()
     {
-        $this->assertTrue(is_string(Text::snake('helloWorld', '_')));
+        $result = Text::snake('helloWorld', '_');
+        $this->assertEquals('hello_world', $result);
     }
 
-    public function testPlural()
+    public function testPluralWordReturnFronSingularWorld()
     {
-        $this->assertTrue(is_string(Text::plural('table')));
+        $result = Text::plural('Man');
+        $this->assertEquals('Men', $result);
     }
 
-    public function testSingular()
+    public function testSingularWordReturnFromPluralWorld()
     {
-        $this->assertTrue(is_string(Text::singular('tables')));
+        $result = Text::singular('Men');
+        $this->assertEquals('Man', $result);
     }
 
-    public function testHumanize()
+    public function testHumanizeStringExistsUnderscore()
     {
-        $this->assertTrue(is_string(Text::humanize('hello_world')));
+        $result = Text::humanize('hello_world');
+        $this->assertEquals('Hello World', $result);
     }
 
-    public function testClassify()
+    public function testClassifiedTableNameReturnOrNot()
     {
-        $this->assertTrue(is_string(Text::classify('user list management')));
+        $result = Text::classify('users contact list');
+        $this->assertEquals('UsersContactList', $result);
     }
 
-    public function testTableize()
+    public function testUuidReturnNotNullAndLengthMust36()
     {
-        $this->assertTrue(is_string(Text::tableize('Test')));
+        $uuID = Text::uuid();
+        $this->assertNotNull($uuID);
+        $this->assertEquals(36, strlen($uuID));
     }
 
-    public function testUuid()
+    public function testStringWordIsExistsOrNotAfterInserted()
     {
-        $this->assertNotNull(Text::uuid());
+        $result = Text::insert('My name is :name and I am :age years old',
+            ['name' => 'Farhad', 'age' => '65']);
+        $this->assertEquals('My name is Farhad and I am 65 years old', $result);
     }
 
-    public function testInsert()
+    public function testWordBreakAfterWrap()
     {
-        $this->assertTrue(is_string(Text::insert('My name is :name and I am :age years old',
-            ['name' => 'Farhad', 'age' => '65'])));
-    }
-
-    public function testWrap()
-    {
-        $this->assertTrue(is_string(Text::wrap('I am a programmer', 9)));
+        $result = Text::wrap('I am a programmer', 6);
+        $testString = 'I am a'."\n".'programmer';
+        $this->assertEquals($testString, $result);
     }
 
 }

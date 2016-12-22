@@ -8,17 +8,16 @@ class Text
 {
 
     /**
-     * @param $string
-     * @param $limit
-     * @param string $end
+     * return excerpt string from cake php Text Class.
+     * @param $text
+     * @param $phrase
+     * @param int $radius
+     * @param string $ellipsis
      * @return string
      */
-    public static function excerpt($string, $limit, $end = '...')
+    public static function excerpt($text, $phrase, $radius = 100, $ellipsis = '...')
     {
-        if (mb_strwidth($string, 'UTF-8') <= $limit) {
-            return $string;
-        }
-        return rtrim(mb_strimwidth($string, 0, $limit, '', 'UTF-8')) . $end;
+        return \Cake\Utility\Text::excerpt($text, $phrase, $radius, $ellipsis);
     }
 
     /**
@@ -42,7 +41,7 @@ class Text
         $manipulateStr = strtolower($string);
         $manipulateWord = strtolower($word);
         $explodeValue = explode($manipulateWord, $manipulateStr);
-        return implode('', $explodeValue);
+        return trim(implode('', $explodeValue));
     }
 
     /**
@@ -110,21 +109,10 @@ class Text
      * @param $tableNAme
      * @return string
      */
-    public static function classify($string)
+    public static function classify($tableName)
     {
-        return Inflector::classify($string);
+        return Inflector::classify($tableName);
     }
-
-    /**
-     * return tableize  form cake php inflector
-     * @param $className
-     * @return string
-     */
-    public static function tableize($className)
-    {
-        return Inflector::tableize($className);
-    }
-
 
     /**
      * return uuid from cake php Text Utility
