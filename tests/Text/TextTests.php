@@ -80,10 +80,4 @@ class TextTests extends PHPUnit_Framework_TestCase
         $testString = 'I am a' . "\n" . 'programmer';
         $this->assertEquals($testString, $result);
     }
-
-    public function testTime()
-    {
-        new DateTime();
-    }
-
 }
