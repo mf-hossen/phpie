@@ -41,7 +41,7 @@ class Text
         $manipulateStr = strtolower($string);
         $manipulateWord = strtolower($word);
         $explodeValue = explode($manipulateWord, $manipulateStr);
-        return trim(implode('', $explodeValue));
+        return trim(implode('', array_map('rtrim', $explodeValue)));
     }
 
     /**
