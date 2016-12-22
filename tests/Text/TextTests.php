@@ -35,13 +35,13 @@ class TextTests extends PHPUnit_Framework_TestCase
         $this->assertEquals('hello_world', $result);
     }
 
-    public function testPluralWordReturnFronSingularWorld()
+    public function testPluralWordReturnFronSingularWord()
     {
         $result = Text::plural('Man');
         $this->assertEquals('Men', $result);
     }
 
-    public function testSingularWordReturnFromPluralWorld()
+    public function testSingularWordReturnFromPluralWord()
     {
         $result = Text::singular('Men');
         $this->assertEquals('Man', $result);
@@ -59,9 +59,10 @@ class TextTests extends PHPUnit_Framework_TestCase
         $this->assertEquals('UsersContactList', $result);
     }
 
-    public function testUuidReturnNotNullAndLengthMust36()
+    public function testUuidReturnNotNullAndLengthMust36Character()
     {
         $uuID = Text::uuid();
+        var_dump($uuID);
         $this->assertNotNull($uuID);
         $this->assertEquals(36, strlen($uuID));
     }
@@ -76,8 +77,13 @@ class TextTests extends PHPUnit_Framework_TestCase
     public function testWordBreakAfterWrap()
     {
         $result = Text::wrap('I am a programmer', 6);
-        $testString = 'I am a'."\n".'programmer';
+        $testString = 'I am a' . "\n" . 'programmer';
         $this->assertEquals($testString, $result);
+    }
+
+    public function testTime()
+    {
+        new DateTime();
     }
 
 }
