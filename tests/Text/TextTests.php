@@ -18,8 +18,7 @@ class TextTests extends PHPUnit_Framework_TestCase
     public function testStringAfterRemovedGivenWordExitsOrNot()
     {
         $result = Text::removeWord('PHP is a most popular programming language. I love php ', 'php');
-        var_dump($result);
-        $this->assertEquals('is a programming language and i love', $result);
+        $this->assertEquals('is a most popular programming language. i love', $result);
     }
 
     public function testReturnStringCamelCaseOrNot()
