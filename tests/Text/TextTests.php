@@ -7,7 +7,6 @@ class TextTests extends PHPUnit_Framework_TestCase
     {
         $result = Text::excerpt('hello world', 0, 4, '---');
         $this->assertEquals('hello---', $result);
-
     }
 
     public function testSlugStringIfFoundSpaceConvertWithGivenDelimiterOrNot()
@@ -62,7 +61,6 @@ class TextTests extends PHPUnit_Framework_TestCase
     public function testUuidReturnNotNullAndLengthMust36Character()
     {
         $uuID = Text::uuid();
-        var_dump($uuID);
         $this->assertNotNull($uuID);
         $this->assertEquals(36, strlen($uuID));
     }
